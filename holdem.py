@@ -44,14 +44,13 @@ class deck(object):
         return out
 
     def take_card(self, val, suit):
-        for i, card in enumerate(active):
-            if card.val == val & card.suit == suit:
-                active.pop(i)
+        for i, c in enumerate(self.active):
+            if (c.val == val) & (c.suit == suit):
+                self.active.pop(i)
                 break
-        return card(val, suit)
+        c = card(val, suit)
+        return c
 
-
-    
     def reset(self):
         self.active = list(self.all_cards)
         shuffle(self.active)
