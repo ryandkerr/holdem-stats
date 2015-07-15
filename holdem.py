@@ -42,6 +42,15 @@ class deck(object):
             c = self.deal_card()
             out.append(c)
         return out
+
+    def take_card(self, val, suit):
+        for i, card in enumerate(active):
+            if card.val == val & card.suit == suit:
+                active.pop(i)
+                break
+        return card(val, suit)
+
+
     
     def reset(self):
         self.active = list(self.all_cards)
