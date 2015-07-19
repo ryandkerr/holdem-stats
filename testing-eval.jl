@@ -8,7 +8,8 @@ immutable Card
   suit::Int
 end
 
-fulldeck = Any[]
+# populate deck filled with all cards
+fulldeck = Card[]
 for v in 2:14
   for s in 1:4
 #     fulldeck.append(Card(v, s))
@@ -18,21 +19,22 @@ end
 
 d = copy(fulldeck)
 
-function takecard!(deck, c::Card)
+# removes and returns card from deck
+function takecard!(deck::Vector, c::Card)
   for (i, cr) in enumerate(deck)
     if (cr.val == c.val) && (cr.suit == c.suit)
       deleteat!(deck, i)
       return c
     end
   end
-
-#   index = (c.val - 2) * 4 + c.suit
-#   deleteat!(deck, index)
-#   return c
+  warn("Card not in deck")
 end
 
-takecard!(d, Card(5,4))
-d
+# easy 2-card hand creation
+# TODO: should make thsi work with optional arguments
+# to be able to make boards of different sizes
+function hand!(d, c1::Card, c2::Card)
+  return [takecard!(d, c1), takecard!(d, c2)]
+end
 
-hand = [takecard!(d, Card(4, 4)), takecard!(d, Card(4,3))]
-
+h = hand!(d, Card(2,4), Card(7,3))
